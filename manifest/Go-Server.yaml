@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-server
+  labels:
+    app: go-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-server
+  template:
+    metadata:
+      labels:
+        app: go-server
+    spec:
+      containers:
+        - name: ext-frontend
+          image: robadrinacr1.azurecr.io/go-server:latest
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-server-service
+spec:
+  selector:
+    app: go-server
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

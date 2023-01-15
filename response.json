@@ -1,0 +1,72 @@
+{
+    "Environment": {
+        "rating": "A",
+        "factorsScore": [
+            {
+                "key": "1",
+                "name": "Carbon Emmision",
+                "value": 900
+            },
+            {
+                "key": "2",
+                "name": "Air Emmision",
+                "value": 800
+            },
+            {
+                "key": "3",
+                "name": "Waste Management",
+                "value": 950
+            }
+        ]
+    },
+    "Social": {
+        "rating": "B",
+        "factorsScore": [
+            {
+                "key": "4",
+                "name": "Diversity and Inclusion",
+                "value": 800
+            },
+            {
+                "key": "5",
+                "name": "Labor Laws",
+                "value": 700
+            },
+            {
+                "key": "6",
+                "name": "Employee Engagement",
+                "value": 650
+            }
+        ]
+    },
+    "Governance": {
+        "rating": "A",
+        "factorsScore": [
+            {
+                "key": "7",
+                "name": "Cyber Risk",
+                "value": 850
+            },
+            {
+                "key": "8",
+                "name": "Compensation",
+                "value": 950
+            },
+            {
+                "key": "9",
+                "name": "Security and Transparancy",
+                "value": 900
+            }
+        ]
+    },
+    "Links": [
+        {
+            "name": "How to improve carbon emmision",
+            "url": "https://www.futurelearn.com/info/blog/how-to-reduce-your-carbon-footprint-tips"
+        },
+        {
+            "name": "Social impact",
+            "url": "https://hbr.org/2020/09/social-impact-efforts-that-create-real-value"
+        }
+    ]
+}
