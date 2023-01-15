@@ -72,10 +72,11 @@ docker tag go-server:latest robadrinacr1.azurecr.io/go-server:latest
 docker push robadrinacr1.azurecr.io/go-server:latest
 ```
 
-Deploy the ingress and then the application, creates a deployment and a service. Uses a new namespace `esg-hack` for the deployment.
+Deploy the config, ingress and then the application, creates a deployment and a service. Uses a new namespace `esg-hack` for the deployment.
 ```
-kubectl apply -f ./manifests/Go-Server.ingress.yaml -n esg-hack
-kubectl apply -f ./manifests/Go-Server.yaml -n esg-hack
+kubectl apply -f ./manifest/Go-Server.config.yaml -n esg-hack
+kubectl apply -f ./manifest/Go-Server.ingress.yaml -n esg-hack
+kubectl apply -f ./manifest/Go-Server.yaml -n esg-hack
 ```
 
 Other troubleshooting commands
