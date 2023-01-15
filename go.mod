@@ -1,4 +1,4 @@
-module demo/go-server
+module github.com/roshan98b/go-server
 
 go 1.19
 
