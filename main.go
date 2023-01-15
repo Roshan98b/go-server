@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )
 
@@ -45,8 +46,12 @@ func main() {
 	router := mux.NewRouter().StrictSlash(true)
 
 	log.Println("Started service")
+
+	// Where ORIGIN_ALLOWED is like `scheme://dns[:port]`, or `*` (insecure)
+	corsOrigins := handlers.AllowedOrigins([]string{os.Getenv("ORIGIN_ALLOWED")})
+
 	router.HandleFunc("/api", mainLink).Methods("GET")
 	router.HandleFunc("/api/upload", uploadLink).Methods("GET")
 
-	log.Fatalln(http.ListenAndServe(":8080", router))
+	log.Fatalln(http.ListenAndServe(":8080", handlers.CORS(corsOrigins)(router)))
 }

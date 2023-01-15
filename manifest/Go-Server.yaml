@@ -20,6 +20,12 @@ spec:
           ports:
             - containerPort: 8080
           imagePullPolicy: Always
+          env:
+            - name: ORIGIN_ALLOWED
+              valueFrom:
+                configMapKeyRef:
+                  name: go-server-configmap
+                  key: origin_allowed
 ---
 apiVersion: v1
 kind: Service
