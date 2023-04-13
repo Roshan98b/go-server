@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -42,6 +43,25 @@ func uploadLink(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(esg)
 }
 
+func receiveLink(w http.ResponseWriter, r *http.Request) {
+	token := r.URL.Query().Get("validationToken")
+	if (token != "") {
+		log.Println("token validation suceeded " + token)
+		w.Header().Set("Content-Type", "text/plain")
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte(token))
+	} else {
+		body, err := io.ReadAll(r.Body)		
+		if err != nil {
+			panic(err)
+		}		
+		log.Println(string(body))
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		w.Write(body)
+	}
+}
+
 func main() {
 	router := mux.NewRouter().StrictSlash(true)
 
@@ -52,6 +72,7 @@ func main() {
 
 	router.HandleFunc("/api", mainLink).Methods("GET")
 	router.HandleFunc("/api/upload", uploadLink).Methods("GET")
+	router.HandleFunc("/api/receive", receiveLink).Methods("POST")
 
 	log.Fatalln(http.ListenAndServe(":8080", handlers.CORS(corsOrigins)(router)))
 }
