@@ -44,6 +44,7 @@ env:
   CLUSTER_NAME: "robadrin-aks1"
   DEPLOYMENT_MANIFEST_PATH: "manifest"
   CLUSTER_NAMESPACE: "esg-hack"
+  ENVIRONMENT: "robadrin-aks1"
 
 jobs:
   buildImage:
@@ -75,6 +76,7 @@ jobs:
       contents: read
       id-token: write
     runs-on: ubuntu-latest
+    environment: ${{ env.ENVIRONMENT }}
     needs: [buildImage]
     steps:
       # Checks out the repository this file is in
