@@ -43,6 +43,7 @@ env:
   RESOURCE_GROUP: "WLD"
   CLUSTER_NAME: "robadrin-aks1"
   DEPLOYMENT_MANIFEST_PATH: "manifest"
+  CLUSTER_NAMESPACE: "esg-hack"
 
 jobs:
   buildImage:
@@ -65,7 +66,7 @@ jobs:
       # Builds and pushes an image up to your Azure Container Registry
       - name: Build and push image to ACR
         run: |
-          az acr login --name ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io
+          az acr login --name ${{ env.AZURE_CONTAINER_REGISTRY }}
           az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ env.CONTAINER_TAG }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} .
 
   deploy:
@@ -108,5 +109,6 @@ jobs:
         with:
           action: deploy
           manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
+          namespace: ${{ env.CLUSTER_NAMESPACE }}
           images: |
             ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ env.CONTAINER_TAG }}
