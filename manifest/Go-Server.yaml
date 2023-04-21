@@ -15,7 +15,7 @@ spec:
         app: go-server
     spec:
       containers:
-        - name: ext-frontend
+        - name: go-server
           image: robadrinacr1.azurecr.io/go-server:latest
           ports:
             - containerPort: 8080
