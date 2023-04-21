@@ -75,6 +75,7 @@ jobs:
       contents: read
       id-token: write
     runs-on: ubuntu-latest
+    environment: robadrin-aks1
     needs: [buildImage]
     steps:
       # Checks out the repository this file is in
